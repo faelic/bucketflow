@@ -1,0 +1,270 @@
+@import "tailwindcss";
+
+:root {
+  --surface: #f7f2ea;
+  --panel-soft: #f2ece3;
+  --panel: #fffdfa;
+  --line: #e6ddd0;
+  --ink: #241f17;
+  --soft-ink: #6f6557;
+  --muted: #a59684;
+  --accent-strong: #748a3d;
+  --accent: #879e4c;
+  --accent-soft: #eef4de;
+  --accent-soft-text: #d9e2bf;
+  --action: #e6783f;
+  --action-strong: #d96528;
+}
+
+@theme inline {
+  --color-background: var(--surface);
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(135, 158, 76, 0.05), transparent 30%),
+    linear-gradient(180deg, #faf6ef 0%, #f7f2ea 100%);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(116, 138, 61, 0.45) transparent;
+}
+
+::selection {
+  background: rgba(116, 138, 61, 0.22);
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(230, 221, 208, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(230, 221, 208, 0.35) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.hero-token {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  border-radius: 999px;
+  border: 1px solid rgba(230, 221, 208, 0.9);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(245, 238, 227, 0.88));
+  box-shadow: 0 20px 45px rgba(86, 73, 50, 0.09);
+  padding: 0.9rem 1.2rem;
+  color: var(--action);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.bucket-card {
+  border: 1px solid rgba(230, 221, 208, 0.9);
+  background: rgba(255, 253, 250, 0.92);
+  box-shadow: 0 25px 60px rgba(86, 73, 50, 0.12);
+}
+
+.hero-payment {
+  min-width: 172px;
+  border-radius: 28px;
+  border: 1px solid rgba(230, 221, 208, 0.9);
+  background: linear-gradient(135deg, rgba(255, 253, 250, 0.96), rgba(246, 239, 229, 0.92));
+  box-shadow: 0 24px 55px rgba(86, 73, 50, 0.11);
+  padding: 1rem 1.15rem;
+}
+
+.bucket-chip {
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(230, 120, 63, 0.94), rgba(228, 136, 74, 0.94));
+  box-shadow: 0 16px 42px rgba(230, 120, 63, 0.24);
+  padding: 0.95rem 1.2rem;
+  color: white;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.float-soft {
+  animation: floatSoft 7s ease-in-out infinite;
+}
+
+.float-soft-delayed {
+  animation: floatSoft 8.5s ease-in-out infinite 0.9s;
+}
+
+.float-slow {
+  animation: floatSlow 9s ease-in-out infinite;
+}
+
+.motion-path {
+  opacity: 0.75;
+  animation: pulseLine 2.8s ease-in-out infinite;
+  transform-origin: left center;
+}
+
+.token-orbiter {
+  animation: orbitShift 6.4s ease-in-out infinite;
+}
+
+.bucket-reveal {
+  animation: bucketLift 0.9s ease-out both;
+}
+
+.section-fade-in {
+  animation: sectionFade 320ms ease-out both;
+}
+
+.pulse-soft {
+  animation: pulseSoft 4.5s ease-in-out infinite;
+}
+
+.scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-area::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(116, 138, 61, 0.35);
+}
+
+.scroll-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(116, 138, 61, 0.5);
+}
+
+.landing-ticker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.landing-ticker__track {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+  animation: landingTicker 20s linear infinite;
+}
+
+.landing-ticker__item {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 1.4rem;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+@keyframes floatSoft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(10px, -12px, 0);
+  }
+}
+
+@keyframes pulseLine {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scaleX(0.88);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scaleX(1.05);
+  }
+}
+
+@keyframes orbitShift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate3d(8px, -8px, 0) rotate(4deg);
+  }
+  50% {
+    transform: translate3d(18px, 0, 0) rotate(0deg);
+  }
+  75% {
+    transform: translate3d(8px, 8px, 0) rotate(-4deg);
+  }
+}
+
+@keyframes bucketLift {
+  0% {
+    opacity: 0;
+    transform: translate3d(-10px, 16px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes sectionFade {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes pulseSoft {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 24px 55px rgba(86, 73, 50, 0.11);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 28px 62px rgba(86, 73, 50, 0.16);
+  }
+}
+
+@keyframes landingTicker {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-25%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-ticker__track {
+    animation: none;
+  }
+}

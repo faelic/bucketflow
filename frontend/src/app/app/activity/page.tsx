@@ -1,0 +1,63 @@
+"use client";
+
+import { motion } from "motion/react";
+
+import { ReceiptsTimeline } from "@/components/dashboard/ReceiptsTimeline";
+import { SectionIntro } from "@/components/dashboard/SectionIntro";
+import { StatusStrip } from "@/components/dashboard/StatusStrip";
+import { demoAccountData } from "@/data/demo-data";
+import { formatDateTimeLabel } from "@/lib/format";
+
+export default function ActivityPage() {
+  const lastReceipt = demoAccountData.receipts[demoAccountData.receipts.length - 1];
+
+  return (
+    <div className="flex flex-col gap-5">
+      <SectionIntro
+        eyebrow="Receipts and history"
+        title="Follow deposits from payment to bucket."
+        copy="V1 can rely on event history for a readable receipt trail, so the product stays simple without a backend."
+        compact
+      />
+
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, delay: 0.04 }}
+      >
+        <StatusStrip
+          items={[
+            {
+              label: "Feed mode",
+              value: "Demo receipts",
+              tone: "olive",
+            },
+            {
+              label: "Latest event",
+              value: lastReceipt ? formatDateTimeLabel(lastReceipt.timestamp) : "No events yet",
+              tone: "stone",
+            },
+            {
+              label: "Entries loaded",
+              value: `${demoAccountData.receipts.length} receipts`,
+              tone: "orange",
+            },
+          ]}
+        />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, delay: 0.08 }}
+        className="flex overflow-hidden"
+      >
+        <div className="w-full max-w-full overflow-hidden">
+          <div className="h-[min(60vh,38rem)] overflow-hidden">
+            <ReceiptsTimeline receipts={demoAccountData.receipts} compact />
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
