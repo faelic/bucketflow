@@ -74,9 +74,9 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[var(--surface)] text-[var(--ink)]">
       <section className="sticky top-0 z-40 border-b border-[var(--line)] bg-[rgba(247,242,234,0.9)] backdrop-blur">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-5 sm:px-6 lg:px-8">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 sm:py-5 lg:px-8">
           <div className="flex items-center gap-4">
-            <div className="text-3xl font-black tracking-tight text-[var(--accent-strong)]">
+            <div className="text-2xl font-black tracking-tight text-[var(--accent-strong)] sm:text-3xl">
               BucketFlow
             </div>
             <p className="hidden text-[11px] uppercase tracking-[0.35em] text-[var(--muted)] sm:block">
@@ -86,7 +86,7 @@ export default function Home() {
 
           <Link
             href="/app"
-            className="rounded-[10px] border border-[var(--accent-strong)] bg-[var(--accent-strong)] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.25em] text-white transition hover:bg-[var(--accent)]"
+            className="rounded-[10px] border border-[var(--accent-strong)] bg-[var(--accent-strong)] px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-[var(--accent)] sm:px-5 sm:text-xs sm:tracking-[0.25em]"
           >
             Explore App
           </Link>
@@ -94,16 +94,21 @@ export default function Home() {
       </section>
 
       <section className="hero-grid relative overflow-hidden">
-        <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 pb-12 pt-8 sm:px-6 md:pb-16 md:pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:pb-20 lg:pt-20">
+        <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 pb-10 pt-6 sm:px-6 md:pb-16 md:pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:px-8 lg:pb-20 lg:pt-20">
           <div className="relative z-10">
 
-            <h1 className="max-w-3xl text-5xl font-black leading-[0.95] tracking-tight text-[var(--accent-strong)] sm:text-6xl lg:text-7xl">
+            <h1 className="max-w-3xl text-[2.75rem] font-black leading-[0.95] tracking-tight text-[var(--accent-strong)] sm:text-6xl lg:text-7xl">
               Organize your stablecoin income.
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-8 text-[var(--soft-ink)] sm:text-lg">
-              BucketFlow helps African freelancers turn incoming stablecoin payments
-              into a practical money system for rent, savings, tax, family support,
-              and cash-out.
+            <p className="mt-5 max-w-xl text-sm leading-7 text-[var(--soft-ink)] sm:text-lg sm:leading-8">
+              <span className="sm:hidden">
+                Turn incoming USDC into a calm system for rent, savings, tax, family support, and cash-out.
+              </span>
+              <span className="hidden sm:inline">
+                BucketFlow helps African freelancers turn incoming stablecoin payments
+                into a practical money system for rent, savings, tax, family support,
+                and cash-out.
+              </span>
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -116,25 +121,25 @@ export default function Home() {
 
             </div>
 
-            <div className="mt-10 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-4 shadow-[0_14px_32px_rgba(86,73,50,0.05)]">
-                <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
+            <div className="mt-8 grid gap-3 sm:mt-10 sm:grid-cols-3">
+              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-3.5 shadow-[0_14px_32px_rgba(86,73,50,0.05)] sm:py-4">
+                <p className="text-[9px] uppercase tracking-[0.18em] text-[var(--muted)] sm:text-[10px] sm:tracking-[0.28em]">
                   Supported flow
                 </p>
                 <p className="mt-2 text-sm font-black tracking-tight text-[var(--ink)]">
                   Deposit → Organize → Withdraw
                 </p>
               </div>
-              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-4 shadow-[0_14px_32px_rgba(86,73,50,0.05)]">
-                <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
+              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-3.5 shadow-[0_14px_32px_rgba(86,73,50,0.05)] sm:py-4">
+                <p className="text-[9px] uppercase tracking-[0.18em] text-[var(--muted)] sm:text-[10px] sm:tracking-[0.28em]">
                   Savings logic
                 </p>
                 <p className="mt-2 text-sm font-black tracking-tight text-[var(--ink)]">
                   30-day withdrawal cooldown
                 </p>
               </div>
-              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-4 shadow-[0_14px_32px_rgba(86,73,50,0.05)]">
-                <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
+              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-3.5 shadow-[0_14px_32px_rgba(86,73,50,0.05)] sm:py-4">
+                <p className="text-[9px] uppercase tracking-[0.18em] text-[var(--muted)] sm:text-[10px] sm:tracking-[0.28em]">
                   V1 network
                 </p>
                 <p className="mt-2 text-sm font-black tracking-tight text-[var(--ink)]">
@@ -144,7 +149,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative flex min-h-[420px] items-center justify-center lg:min-h-[560px]">
+          <div className="relative flex min-h-[360px] items-center justify-center sm:min-h-[420px] lg:min-h-[560px]">
             <HeroFlowVisual />
           </div>
         </div>
@@ -155,12 +160,12 @@ export default function Home() {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="flex min-h-[180px] flex-col items-center justify-center border-x border-[var(--line)] bg-[var(--panel-soft)] px-6 py-8 text-center transition hover:bg-[#f6f1e8]"
+              className="flex min-h-[132px] flex-col items-center justify-center border-x border-[var(--line)] bg-[var(--panel-soft)] px-6 py-6 text-center transition hover:bg-[#f6f1e8] sm:min-h-[180px] sm:py-8"
             >
               <div className="inline-flex h-8 w-8 items-center justify-center text-[var(--action)]">
                 <AppIcon name={feature.icon} className="h-5 w-5" />
               </div>
-              <h2 className="mt-8 text-[12px] font-semibold uppercase tracking-[0.38em] text-[var(--muted)]">
+              <h2 className="mt-6 text-[11px] font-semibold uppercase tracking-[0.26em] text-[var(--muted)] sm:mt-8 sm:text-[12px] sm:tracking-[0.38em]">
                 {feature.title}
               </h2>
             </div>
@@ -186,7 +191,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-6 lg:px-8">
+      <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <LandingSectionHeader
           eyebrow="// How it works"
           title="Control your cash flow, instantly"
@@ -194,24 +199,24 @@ export default function Home() {
           accent="orange"
         />
 
-        <div className="mt-10 grid gap-px overflow-hidden rounded-[12px] border border-[var(--line)] bg-[var(--line)] lg:grid-cols-3">
+        <div className="mt-8 grid gap-px overflow-hidden rounded-[12px] border border-[var(--line)] bg-[var(--line)] lg:mt-10 lg:grid-cols-3">
           {steps.map((step) => (
             <div
               key={step.number}
-              className="group bg-white px-7 py-8 transition duration-300 hover:bg-[#fcfaf5]"
+              className="group bg-white px-5 py-6 transition duration-300 hover:bg-[#fcfaf5] sm:px-7 sm:py-8"
             >
               <div className="flex items-center justify-between">
-                <p className="text-5xl font-black tracking-tight text-[var(--accent-soft-text)]">
+                <p className="text-4xl font-black tracking-tight text-[var(--accent-soft-text)] sm:text-5xl">
                   {step.number}
                 </p>
                 <div className="inline-flex h-11 w-11 items-center justify-center rounded-[10px] bg-[var(--panel-soft)] text-[var(--accent-strong)] transition duration-300 group-hover:-translate-y-0.5 group-hover:bg-[var(--accent-soft)] group-hover:text-[var(--action)]">
                   <AppIcon name={step.icon} className="h-5 w-5" />
                 </div>
               </div>
-              <h3 className="mt-6 text-2xl font-bold tracking-tight text-[var(--ink)] transition duration-300 group-hover:text-[var(--accent-strong)]">
+              <h3 className="mt-5 text-xl font-bold tracking-tight text-[var(--ink)] transition duration-300 group-hover:text-[var(--accent-strong)] sm:mt-6 sm:text-2xl">
                 {step.title}
               </h3>
-              <p className="mt-4 text-sm leading-7 text-[var(--soft-ink)]">
+              <p className="mt-3 text-[13px] leading-6 text-[var(--soft-ink)] sm:mt-4 sm:text-sm sm:leading-7">
                 {step.copy}
               </p>
               <div className="mt-6 h-[2px] w-14 bg-[var(--line)] transition duration-300 group-hover:w-24 group-hover:bg-[var(--action)]" />

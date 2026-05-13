@@ -53,10 +53,10 @@ export function HeroFlowVisual() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35, ease: "easeOut" }}
-          className="rounded-[12px] border border-[rgba(230,221,208,0.8)] bg-[rgba(255,253,250,0.72)] p-5 shadow-[0_22px_50px_rgba(86,73,50,0.08)] backdrop-blur"
+          className="rounded-[12px] border border-[rgba(230,221,208,0.8)] bg-[rgba(255,253,250,0.72)] p-4 shadow-[0_22px_50px_rgba(86,73,50,0.08)] backdrop-blur sm:p-5"
         >
           <div className="grid gap-4">
-            <div className="flex items-center justify-between gap-4 rounded-[10px] border border-[var(--line)] bg-white/80 p-4 shadow-[0_14px_32px_rgba(86,73,50,0.05)]">
+            <div className="rounded-[10px] border border-[var(--line)] bg-white/80 p-4 shadow-[0_14px_32px_rgba(86,73,50,0.05)]">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.34em] text-[var(--muted)]">
                   Incoming payment
@@ -65,11 +65,6 @@ export function HeroFlowVisual() {
                   $1,200
                 </h3>
                 <p className="mt-1 text-sm text-[var(--soft-ink)]">USDC on Sepolia</p>
-              </div>
-              <div className="flex h-14 w-14 items-center justify-center rounded-[10px] bg-[linear-gradient(135deg,var(--action),#f29a62)] shadow-[0_18px_40px_rgba(230,120,63,0.24)]">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-xs font-black tracking-[0.18em] text-[var(--action)]">
-                  BF
-                </div>
               </div>
             </div>
 
@@ -80,33 +75,23 @@ export function HeroFlowVisual() {
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.36, delay: 0.08 + index * 0.06, ease: "easeOut" }}
-                  className={`rounded-[10px] border border-white/75 p-3.5 shadow-[0_16px_32px_rgba(86,73,50,0.08)] ${bucket.tone} ${bucket.label === "Rent" ? "col-span-2" : ""
-                    }`}
+                  className={`rounded-[10px] border border-white/75 p-3 shadow-[0_16px_32px_rgba(86,73,50,0.08)] sm:p-3.5 ${bucket.tone}`}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.24em] opacity-70">
+                      <p className="text-[9px] uppercase tracking-[0.16em] opacity-70 sm:text-[10px] sm:tracking-[0.24em]">
                         {bucket.label}
                       </p>
-                      <p className="mt-2 text-lg font-black tracking-tight">
+                      <p className="mt-2 text-base font-black tracking-tight sm:text-lg">
                         {bucket.amount}
                       </p>
                     </div>
-                    <div className="rounded-full bg-white/70 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.18em]">
+                    <div className="rounded-full bg-white/70 px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.12em] sm:text-[9px] sm:tracking-[0.18em]">
                       {bucket.value}
                     </div>
                   </div>
                 </motion.div>
               ))}
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-full bg-white/90 px-4 py-3 text-[10px] font-bold uppercase tracking-[0.26em] text-[var(--accent-strong)] shadow-[0_12px_28px_rgba(116,138,61,0.12)]">
-                Split rules saved
-              </div>
-              <div className="rounded-full bg-[var(--action)] px-4 py-3 text-[10px] font-bold uppercase tracking-[0.26em] text-white shadow-[0_12px_28px_rgba(230,120,63,0.2)]">
-                Savings cooldown active
-              </div>
             </div>
           </div>
         </motion.div>

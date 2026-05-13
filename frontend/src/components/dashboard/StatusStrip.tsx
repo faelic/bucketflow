@@ -26,9 +26,9 @@ export function StatusStrip({ items }: StatusStripProps) {
         return (
           <div
             key={`${item.label}-${item.value}`}
-            className={`rounded-[10px] border px-3.5 py-3 ${tone}`}
+            className={`rounded-[10px] border px-3 py-3 sm:px-3.5 ${tone}`}
           >
-            <p className="text-[10px] uppercase tracking-[0.28em] opacity-70">
+            <p className="text-[9px] uppercase tracking-[0.2em] opacity-70 sm:text-[10px] sm:tracking-[0.28em]">
               {item.label}
             </p>
             <p className="mt-1.5 text-sm font-black tracking-tight">

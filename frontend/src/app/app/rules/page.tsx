@@ -35,7 +35,7 @@ export default function RulesPage() {
         transition={{ duration: 0.35, delay: 0.04 }}
         className="min-h-0"
       >
-        <SplitRulePanel splitRule={accountData.splitRule} compact />
+        <SplitRulePanel splitRule={accountData.splitRule} />
       </motion.div>
 
       <motion.div

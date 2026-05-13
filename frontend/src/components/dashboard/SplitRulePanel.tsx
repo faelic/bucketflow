@@ -3,13 +3,9 @@ import { formatBpsAsPercent } from "@/lib/format";
 
 type SplitRulePanelProps = {
   splitRule: SplitRule;
-  compact?: boolean;
 };
 
-export function SplitRulePanel({
-  splitRule,
-  compact = false,
-}: SplitRulePanelProps) {
+export function SplitRulePanel({ splitRule }: SplitRulePanelProps) {
   const rules = [
     {
       label: "Rent",
@@ -44,7 +40,7 @@ export function SplitRulePanel({
     <section className="rounded-[12px] border border-[var(--line)] bg-[var(--panel)] p-4 shadow-[0_12px_30px_rgba(86,73,50,0.05)]">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-[10px] uppercase tracking-[0.34em] text-[var(--muted)]">
+          <p className="text-[9px] uppercase tracking-[0.26em] text-[var(--muted)] sm:text-[10px] sm:tracking-[0.34em]">
             Saved split
           </p>
           <h2 className="mt-1.5 text-lg font-black tracking-tight text-[var(--ink)]">
@@ -52,22 +48,18 @@ export function SplitRulePanel({
           </h2>
         </div>
 
-        <div className="rounded-full bg-[var(--accent-soft)] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
+        <div className="rounded-full bg-[var(--accent-soft)] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--accent-strong)] sm:text-[11px] sm:tracking-[0.18em]">
           {formatBpsAsPercent(totalBps)}
         </div>
       </div>
 
-      <div
-        className={`mt-3 grid gap-2.5 ${
-          compact ? "sm:grid-cols-2 xl:grid-cols-5" : "sm:grid-cols-2 xl:grid-cols-5"
-        }`}
-      >
+      <div className="mt-3 grid grid-cols-2 gap-2.5 xl:grid-cols-5">
         {rules.map((rule) => (
           <div
             key={rule.label}
-            className={`rounded-[10px] border px-3.5 py-3 ${rule.tone}`}
+            className={`rounded-[10px] border px-3 py-3 sm:px-3.5 ${rule.tone}`}
           >
-            <p className="text-[10px] uppercase tracking-[0.28em] opacity-70">
+            <p className="text-[9px] uppercase tracking-[0.18em] opacity-70 sm:text-[10px] sm:tracking-[0.28em]">
               {rule.label}
             </p>
             <p className="mt-1.5 text-sm font-black tracking-tight">

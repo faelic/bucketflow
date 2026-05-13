@@ -42,13 +42,13 @@ export function ReceiptsTimeline({
       }`}
     >
       <div className="max-w-2xl">
-        <p className="text-[10px] uppercase tracking-[0.34em] text-[var(--muted)]">
+        <p className="text-[9px] uppercase tracking-[0.26em] text-[var(--muted)] sm:text-[10px] sm:tracking-[0.34em]">
           Recent activity
         </p>
         <h2 className={`font-black tracking-tight text-[var(--ink)] ${compact ? "mt-2 text-lg" : "mt-2.5 text-xl"}`}>
           Receipt timeline
         </h2>
-        <p className={`text-xs text-[var(--soft-ink)] ${compact ? "mt-1.5 leading-5" : "mt-2 leading-6"}`}>
+        <p className={`text-[11px] text-[var(--soft-ink)] ${compact ? "mt-1.5 leading-5 sm:text-xs" : "mt-2 leading-5 sm:text-xs sm:leading-6"}`}>
           Live mode will build this feed from contract events. Demo mode uses seeded
           examples to show the same interaction pattern.
         </p>
@@ -63,8 +63,8 @@ export function ReceiptsTimeline({
           {receipts.map((receipt) => (
             <article
               key={receipt.id}
-              className={`group rounded-[10px] border border-[var(--line)] bg-white transition hover:border-[rgba(116,138,61,0.28)] hover:shadow-[0_12px_28px_rgba(86,73,50,0.05)] ${compact ? "p-3.5" : "p-4"}`}
-            >
+            className={`group rounded-[10px] border border-[var(--line)] bg-white transition hover:border-[rgba(116,138,61,0.28)] hover:shadow-[0_12px_28px_rgba(86,73,50,0.05)] ${compact ? "p-3" : "p-3.5 sm:p-4"}`}
+          >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div className="flex items-start gap-3">
                   <span
@@ -77,13 +77,13 @@ export function ReceiptsTimeline({
                     }`}
                   />
                   <div>
-                    <span className="inline-flex rounded-full bg-[var(--accent-soft)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-[var(--accent-strong)]">
+                    <span className="inline-flex rounded-full bg-[var(--accent-soft)] px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)] sm:text-[10px] sm:tracking-[0.28em]">
                       {kindLabel[receipt.kind]}
                     </span>
                     <h3 className={`font-bold tracking-tight text-[var(--ink)] transition group-hover:text-[var(--accent-strong)] ${compact ? "mt-2 text-base" : "mt-2.5 text-lg"}`}>
                       {receipt.title}
                     </h3>
-                    <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-[var(--muted)]">
+                    <p className="mt-1 text-[10px] uppercase tracking-[0.14em] text-[var(--muted)] sm:text-[11px] sm:tracking-[0.18em]">
                       {kindDescription[receipt.kind]}
                     </p>
                     <p className="mt-1 text-xs text-[var(--soft-ink)]">
@@ -96,9 +96,9 @@ export function ReceiptsTimeline({
                         href={`${SEPOLIA_TX_EXPLORER_BASE_URL}${receipt.transactionHash}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="mt-2 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--action)] transition hover:text-[var(--action-strong)]"
+                        className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--action)] transition hover:text-[var(--action-strong)] sm:text-xs sm:tracking-[0.18em]"
                       >
-                        View tx {formatShortTransactionHash(receipt.transactionHash)}
+                        Tx {formatShortTransactionHash(receipt.transactionHash)}
                       </a>
                     ) : null}
                   </div>

@@ -54,32 +54,32 @@ export function BucketGrid({ balances }: BucketGridProps) {
       {bucketMeta.map((bucket) => (
         <article
           key={bucket.key}
-          className={`group rounded-[12px] border border-[var(--line)] bg-[linear-gradient(135deg,var(--panel),#ffffff)] p-3.5 shadow-[0_12px_30px_rgba(86,73,50,0.05)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(86,73,50,0.08)]`}
+          className={`group rounded-[12px] border border-[var(--line)] bg-[linear-gradient(135deg,var(--panel),#ffffff)] p-3 shadow-[0_12px_30px_rgba(86,73,50,0.05)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(86,73,50,0.08)] sm:p-3.5`}
         >
           <div className="flex items-start justify-between gap-4">
             <div>
               <span
-              className={`inline-flex rounded-full bg-gradient-to-r px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] ${bucket.tone}`}
+              className={`inline-flex rounded-full bg-gradient-to-r px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] ${bucket.tone} sm:text-[10px] sm:tracking-[0.24em]`}
               >
                 {bucket.marker}
               </span>
-              <h3 className="mt-2.5 text-lg font-black tracking-tight text-[var(--ink)] transition group-hover:text-[var(--accent-strong)]">
+              <h3 className="mt-2 text-base font-black tracking-tight text-[var(--ink)] transition group-hover:text-[var(--accent-strong)] sm:mt-2.5 sm:text-lg">
                 {bucket.label}
               </h3>
             </div>
             <span
-              className={`mt-1 inline-flex h-9 w-9 items-center justify-center rounded-[10px] ${bucket.accent} text-[10px] font-black uppercase tracking-[0.18em] text-white transition group-hover:scale-105`}
+              className={`mt-1 inline-flex h-8 w-8 items-center justify-center rounded-[10px] ${bucket.accent} text-[9px] font-black uppercase tracking-[0.14em] text-white transition group-hover:scale-105 sm:h-9 sm:w-9 sm:text-[10px] sm:tracking-[0.18em]`}
             >
               {bucket.label.slice(0, 2)}
             </span>
           </div>
-          <p className="mt-3 text-[1.55rem] font-black tracking-tight text-[var(--ink)]">
+          <p className="mt-2.5 text-[1.4rem] font-black tracking-tight text-[var(--ink)] sm:mt-3 sm:text-[1.55rem]">
             {formatUsd(balances[bucket.key])}
           </p>
-          <p className="mt-1 text-[11px] uppercase tracking-[0.24em] text-[var(--muted)]">
+          <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-[var(--muted)] sm:text-[11px] sm:tracking-[0.24em]">
             Current bucket balance
           </p>
-          <p className="mt-2 text-[11px] leading-5 text-[var(--soft-ink)]">
+          <p className="mt-2 hidden text-[11px] leading-5 text-[var(--soft-ink)] sm:block">
             {bucket.copy}
           </p>
         </article>

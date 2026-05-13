@@ -24,16 +24,16 @@ export function SectionIntro({
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="max-w-2xl"
     >
-      <p className="text-[10px] uppercase tracking-[0.38em] text-[var(--muted)]">
+      <p className="text-[9px] uppercase tracking-[0.28em] text-[var(--muted)] sm:text-[10px] sm:tracking-[0.38em]">
         {eyebrow}
       </p>
       <h1
         className={`mt-3 font-black tracking-tight text-[var(--ink)] ${
           ultraCompact
-            ? "text-2xl sm:text-3xl"
+            ? "text-[1.7rem] leading-tight sm:text-3xl"
             : compact
-              ? "text-3xl sm:text-4xl"
-              : "text-4xl sm:text-5xl"
+              ? "text-[2rem] leading-tight sm:text-4xl"
+              : "text-[2.35rem] leading-[1.02] sm:text-5xl"
         }`}
       >
         {title}
@@ -41,10 +41,10 @@ export function SectionIntro({
       <p
         className={`mt-2 text-[var(--soft-ink)] ${
           ultraCompact
-            ? "text-xs leading-5"
+            ? "text-[11px] leading-5 sm:text-xs"
             : compact
-              ? "text-sm leading-6"
-              : "text-base leading-8"
+              ? "text-[13px] leading-6 sm:text-sm"
+              : "text-sm leading-7 sm:text-base sm:leading-8"
         }`}
       >
         {copy}
