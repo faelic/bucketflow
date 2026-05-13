@@ -156,16 +156,16 @@ export default function Home() {
       </section>
 
       <section className="border-y border-[var(--line)] bg-[var(--panel-soft)]">
-        <div className="mx-auto grid w-full max-w-7xl gap-px px-5 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
+        <div className="mx-auto flex w-full max-w-7xl gap-3 overflow-x-auto px-4 py-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:grid sm:gap-px sm:overflow-visible sm:px-6 sm:py-0 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="flex min-h-[132px] flex-col items-center justify-center border-x border-[var(--line)] bg-[var(--panel-soft)] px-6 py-6 text-center transition hover:bg-[#f6f1e8] sm:min-h-[180px] sm:py-8"
+              className="flex min-h-[104px] min-w-[12rem] shrink-0 flex-col items-center justify-center rounded-[12px] border border-[var(--line)] bg-[var(--panel-soft)] px-5 py-5 text-center transition hover:bg-[#f6f1e8] sm:min-h-[180px] sm:min-w-0 sm:rounded-none sm:border-x sm:border-y-0 sm:px-6 sm:py-8"
             >
               <div className="inline-flex h-8 w-8 items-center justify-center text-[var(--action)]">
                 <AppIcon name={feature.icon} className="h-5 w-5" />
               </div>
-              <h2 className="mt-6 text-[11px] font-semibold uppercase tracking-[0.26em] text-[var(--muted)] sm:mt-8 sm:text-[12px] sm:tracking-[0.38em]">
+              <h2 className="mt-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--muted)] sm:mt-8 sm:text-[12px] sm:tracking-[0.38em]">
                 {feature.title}
               </h2>
             </div>
