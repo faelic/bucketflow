@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useConnect, useDisconnect, useSwitchChain } from "wagmi";
 
@@ -88,9 +89,12 @@ export function AppTopbar({ appState }: AppTopbarProps) {
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:py-5">
         <div className="flex items-start gap-4">
           <div>
-            <h1 className="text-2xl font-black tracking-tight text-[var(--accent-strong)] sm:text-3xl">
+            <Link
+              href="/"
+              className="inline-block text-2xl font-black tracking-tight text-[var(--accent-strong)] transition hover:text-[var(--accent)] sm:text-3xl"
+            >
               BucketFlow
-            </h1>
+            </Link>
             <p className="mt-1 max-w-[16rem] text-[10px] uppercase tracking-[0.28em] text-[var(--muted)] sm:max-w-none sm:text-[11px] sm:tracking-[0.35em]">
               {supportingCopy}
             </p>

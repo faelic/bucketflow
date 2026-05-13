@@ -8,12 +8,16 @@ import "./globals.css";
 const geistSans = localFont({
   src: "./fonts/GeistLatin.woff2",
   variable: "--font-geist-sans",
+  weight: "100 900",
+  style: "normal",
   display: "swap",
 });
 
 const geistMono = localFont({
   src: "./fonts/GeistMonoLatin.woff2",
   variable: "--font-geist-mono",
+  weight: "100 900",
+  style: "normal",
   display: "swap",
 });
 
