@@ -14,6 +14,7 @@ type Step = {
   number: string;
   title: string;
   copy: string;
+  mobileCopy: string;
   icon: IconName;
 };
 
@@ -41,18 +42,21 @@ const steps: Step[] = [
     number: "01",
     title: "Open the app",
     copy: "Start in preview mode to understand the workflow, then connect your wallet when you are ready to use live actions.",
+    mobileCopy: "Start in preview, then connect your wallet when you are ready.",
     icon: "spark",
   },
   {
     number: "02",
     title: "Set your split",
     copy: "Review or update how each payment should flow across Rent, Savings, Tax, Family Support, and Cash-out.",
+    mobileCopy: "Choose how each payment should be split across your buckets.",
     icon: "sliders",
   },
   {
     number: "03",
     title: "Deposit and withdraw",
     copy: "Approve the stablecoin, deposit once, and withdraw from the specific bucket that matches the real-life priority you need.",
+    mobileCopy: "Approve once, deposit, then withdraw from the bucket you need.",
     icon: "deposit",
   },
 ];
@@ -111,10 +115,10 @@ export default function Home() {
               </span>
             </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="mt-10 flex justify-center sm:justify-start">
               <Link
                 href="/app"
-                className="inline-flex items-center justify-center rounded-[10px] bg-[var(--action)] px-7 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:translate-y-[-1px] hover:bg-[var(--action-strong)]"
+                className="inline-flex items-center justify-center self-center rounded-[10px] bg-[var(--action)] px-7 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:translate-y-[-1px] hover:bg-[var(--action-strong)] sm:self-auto"
               >
                 Launch App
               </Link>
@@ -199,54 +203,58 @@ export default function Home() {
           accent="orange"
         />
 
-        <div className="mt-8 grid gap-px overflow-hidden rounded-[12px] border border-[var(--line)] bg-[var(--line)] lg:mt-10 lg:grid-cols-3">
-          {steps.map((step) => (
+        <div className="mt-7 grid gap-3 sm:mt-8 sm:gap-px sm:overflow-hidden sm:rounded-[12px] sm:border sm:border-[var(--line)] sm:bg-[var(--line)] lg:mt-10 lg:grid-cols-3">
+          {steps.map((step, index) => (
             <div
               key={step.number}
-              className="group bg-white px-5 py-6 transition duration-300 hover:bg-[#fcfaf5] sm:px-7 sm:py-8"
+              className="group relative rounded-[12px] border border-[var(--line)] bg-white px-5 py-5 transition duration-300 hover:bg-[#fcfaf5] sm:rounded-none sm:border-0 sm:px-7 sm:py-8"
             >
-              <div className="flex items-center justify-between">
-                <p className="text-4xl font-black tracking-tight text-[var(--accent-soft-text)] sm:text-5xl">
+              <div className="flex items-start justify-between gap-4">
+                <p className="text-3xl font-black tracking-tight text-[var(--accent-soft-text)] sm:text-5xl">
                   {step.number}
                 </p>
-                <div className="inline-flex h-11 w-11 items-center justify-center rounded-[10px] bg-[var(--panel-soft)] text-[var(--accent-strong)] transition duration-300 group-hover:-translate-y-0.5 group-hover:bg-[var(--accent-soft)] group-hover:text-[var(--action)]">
-                  <AppIcon name={step.icon} className="h-5 w-5" />
+                <div className="inline-flex h-10 w-10 items-center justify-center rounded-[10px] bg-[var(--panel-soft)] text-[var(--accent-strong)] transition duration-300 group-hover:-translate-y-0.5 group-hover:bg-[var(--accent-soft)] group-hover:text-[var(--action)] sm:h-11 sm:w-11">
+                  <AppIcon name={step.icon} className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
                 </div>
               </div>
-              <h3 className="mt-5 text-xl font-bold tracking-tight text-[var(--ink)] transition duration-300 group-hover:text-[var(--accent-strong)] sm:mt-6 sm:text-2xl">
+              <h3 className="mt-4 text-[1.9rem] font-black leading-[1] tracking-tight text-[var(--ink)] transition duration-300 group-hover:text-[var(--accent-strong)] sm:mt-6 sm:text-2xl sm:font-bold sm:leading-none">
                 {step.title}
               </h3>
-              <p className="mt-3 text-[13px] leading-6 text-[var(--soft-ink)] sm:mt-4 sm:text-sm sm:leading-7">
-                {step.copy}
+              <p className="mt-3 text-[14px] leading-6 text-[var(--soft-ink)] sm:mt-4 sm:text-sm sm:leading-7">
+                <span className="sm:hidden">{step.mobileCopy}</span>
+                <span className="hidden sm:inline">{step.copy}</span>
               </p>
-              <div className="mt-6 h-[2px] w-14 bg-[var(--line)] transition duration-300 group-hover:w-24 group-hover:bg-[var(--action)]" />
+              <div className="mt-5 h-[2px] w-12 bg-[var(--line)] transition duration-300 group-hover:w-20 group-hover:bg-[var(--action)] sm:mt-6 sm:w-14 sm:group-hover:w-24" />
+              {index < steps.length - 1 ? (
+                <div className="absolute left-10 top-[calc(100%-1px)] h-5 w-px bg-[var(--line)] sm:hidden" />
+              ) : null}
             </div>
           ))}
         </div>
       </section>
 
       <footer className="border-t border-[var(--line)] bg-[var(--panel-soft)]">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-10 sm:px-6 lg:flex-row lg:items-end lg:justify-between lg:px-8">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-5 py-8 sm:px-6 sm:py-10 lg:flex-row lg:items-end lg:justify-between lg:px-8">
           <div className="max-w-xl">
             <p className="text-[10px] uppercase tracking-[0.36em] text-[var(--muted)]">
               BucketFlow
             </p>
-            <h2 className="mt-3 text-2xl font-black tracking-tight text-[var(--ink)]">
+            <h2 className="mt-2.5 text-[1.65rem] font-black tracking-tight text-[var(--ink)] sm:mt-3 sm:text-2xl">
               Stablecoin income infrastructure for freelancers.
             </h2>
-            <p className="mt-3 text-sm leading-7 text-[var(--soft-ink)]">
+            <p className="mt-2.5 text-[13px] leading-6 text-[var(--soft-ink)] sm:mt-3 sm:text-sm sm:leading-7">
               Organize stablecoin payments into rent, savings, tax, family support,
               and cash-out with a calmer money workflow.
             </p>
           </div>
 
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between lg:min-w-[320px] lg:justify-end">
-            <div className="text-[11px] uppercase tracking-[0.3em] text-[var(--muted)]">
+          <div className="flex items-center justify-between gap-4 sm:justify-end lg:min-w-[320px]">
+            <div className="text-[10px] uppercase tracking-[0.24em] text-[var(--muted)] sm:text-[11px] sm:tracking-[0.3em]">
               • Built on Sepolia
             </div>
             <Link
               href="/app"
-              className="inline-flex items-center justify-center rounded-[10px] border border-[var(--accent-strong)] bg-[var(--accent-strong)] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.22em] text-white transition hover:bg-[var(--accent)]"
+              className="inline-flex items-center justify-center rounded-[10px] border border-[var(--accent-strong)] bg-[var(--accent-strong)] px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-[var(--accent)] sm:px-5 sm:text-xs sm:tracking-[0.22em]"
             >
               Open App
             </Link>
