@@ -3,8 +3,21 @@ import Link from "next/link";
 import { HeroFlowVisual } from "@/components/landing/HeroFlowVisual";
 import { LandingSectionHeader } from "@/components/landing/LandingSectionHeader";
 import { AppIcon } from "@/components/shared/AppIcon";
+import type { IconName } from "@/components/shared/AppIcon";
 
-const features = [
+type Feature = {
+  title: string;
+  icon: IconName;
+};
+
+type Step = {
+  number: string;
+  title: string;
+  copy: string;
+  icon: IconName;
+};
+
+const features: Feature[] = [
   {
     title: "Income Control",
     icon: "sliders",
@@ -23,11 +36,11 @@ const features = [
   },
 ];
 
-const steps = [
+const steps: Step[] = [
   {
     number: "01",
     title: "Open the app",
-    copy: "Start in demo mode to understand the workflow, then connect your wallet when you are ready to use live actions.",
+    copy: "Start in preview mode to understand the workflow, then connect your wallet when you are ready to use live actions.",
     icon: "spark",
   },
   {
@@ -73,7 +86,7 @@ export default function Home() {
 
           <Link
             href="/app"
-            className="rounded-full border border-[var(--accent-strong)] bg-[var(--accent-strong)] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.25em] text-white transition hover:bg-[var(--accent)]"
+            className="rounded-[10px] border border-[var(--accent-strong)] bg-[var(--accent-strong)] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.25em] text-white transition hover:bg-[var(--accent)]"
           >
             Explore App
           </Link>
@@ -81,11 +94,9 @@ export default function Home() {
       </section>
 
       <section className="hero-grid relative overflow-hidden">
-        <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-28">
+        <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 pb-12 pt-8 sm:px-6 md:pb-16 md:pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:pb-20 lg:pt-20">
           <div className="relative z-10">
-            <p className="mb-5 text-[11px] uppercase tracking-[0.45em] text-[var(--muted)]">
-              Stablecoin income, organized for real life
-            </p>
+
             <h1 className="max-w-3xl text-5xl font-black leading-[0.95] tracking-tight text-[var(--accent-strong)] sm:text-6xl lg:text-7xl">
               Organize your stablecoin income.
             </h1>
@@ -98,7 +109,7 @@ export default function Home() {
             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
               <Link
                 href="/app"
-                className="inline-flex items-center justify-center rounded-2xl bg-[var(--action)] px-7 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:translate-y-[-1px] hover:bg-[var(--action-strong)]"
+                className="inline-flex items-center justify-center rounded-[10px] bg-[var(--action)] px-7 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:translate-y-[-1px] hover:bg-[var(--action-strong)]"
               >
                 Launch App
               </Link>
@@ -106,7 +117,7 @@ export default function Home() {
             </div>
 
             <div className="mt-10 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-[22px] border border-[var(--line)] bg-white/70 px-4 py-4 shadow-[0_14px_32px_rgba(86,73,50,0.05)]">
+              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-4 shadow-[0_14px_32px_rgba(86,73,50,0.05)]">
                 <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
                   Supported flow
                 </p>
@@ -114,7 +125,7 @@ export default function Home() {
                   Deposit → Organize → Withdraw
                 </p>
               </div>
-              <div className="rounded-[22px] border border-[var(--line)] bg-white/70 px-4 py-4 shadow-[0_14px_32px_rgba(86,73,50,0.05)]">
+              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-4 shadow-[0_14px_32px_rgba(86,73,50,0.05)]">
                 <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
                   Savings logic
                 </p>
@@ -122,12 +133,12 @@ export default function Home() {
                   30-day withdrawal cooldown
                 </p>
               </div>
-              <div className="rounded-[22px] border border-[var(--line)] bg-white/70 px-4 py-4 shadow-[0_14px_32px_rgba(86,73,50,0.05)]">
+              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-4 shadow-[0_14px_32px_rgba(86,73,50,0.05)]">
                 <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
                   V1 network
                 </p>
                 <p className="mt-2 text-sm font-black tracking-tight text-[var(--ink)]">
-                  One stablecoin on Sepolia
+                  USDC on Sepolia
                 </p>
               </div>
             </div>
@@ -178,12 +189,12 @@ export default function Home() {
       <section className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-6 lg:px-8">
         <LandingSectionHeader
           eyebrow="// How it works"
-          title="Build calm around every payment."
-          copy="BucketFlow should feel less like crypto tooling and more like a dependable money system for freelancers."
+          title="Control your cash flow, instantly"
+          copy="BucketFlow feels less like a crypto tool and more like a dependable money system for freelancers."
           accent="orange"
         />
 
-        <div className="mt-10 grid gap-px overflow-hidden rounded-[32px] border border-[var(--line)] bg-[var(--line)] lg:grid-cols-3">
+        <div className="mt-10 grid gap-px overflow-hidden rounded-[12px] border border-[var(--line)] bg-[var(--line)] lg:grid-cols-3">
           {steps.map((step) => (
             <div
               key={step.number}
@@ -193,7 +204,7 @@ export default function Home() {
                 <p className="text-5xl font-black tracking-tight text-[var(--accent-soft-text)]">
                   {step.number}
                 </p>
-                <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--panel-soft)] text-[var(--accent-strong)] transition duration-300 group-hover:-translate-y-0.5 group-hover:bg-[var(--accent-soft)] group-hover:text-[var(--action)]">
+                <div className="inline-flex h-11 w-11 items-center justify-center rounded-[10px] bg-[var(--panel-soft)] text-[var(--accent-strong)] transition duration-300 group-hover:-translate-y-0.5 group-hover:bg-[var(--accent-soft)] group-hover:text-[var(--action)]">
                   <AppIcon name={step.icon} className="h-5 w-5" />
                 </div>
               </div>
@@ -226,11 +237,11 @@ export default function Home() {
 
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between lg:min-w-[320px] lg:justify-end">
             <div className="text-[11px] uppercase tracking-[0.3em] text-[var(--muted)]">
-              Sepolia-first • Demo mode available
+              • Built on Sepolia
             </div>
             <Link
               href="/app"
-              className="inline-flex items-center justify-center rounded-full border border-[var(--accent-strong)] bg-[var(--accent-strong)] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.22em] text-white transition hover:bg-[var(--accent)]"
+              className="inline-flex items-center justify-center rounded-[10px] border border-[var(--accent-strong)] bg-[var(--accent-strong)] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.22em] text-white transition hover:bg-[var(--accent)]"
             >
               Open App
             </Link>

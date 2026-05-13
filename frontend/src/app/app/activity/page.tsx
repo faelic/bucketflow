@@ -2,21 +2,32 @@
 
 import { motion } from "motion/react";
 
+import { useDashboardState } from "@/components/dashboard/DashboardStateProvider";
 import { ReceiptsTimeline } from "@/components/dashboard/ReceiptsTimeline";
 import { SectionIntro } from "@/components/dashboard/SectionIntro";
 import { StatusStrip } from "@/components/dashboard/StatusStrip";
-import { demoAccountData } from "@/data/demo-data";
 import { formatDateTimeLabel } from "@/lib/format";
 
 export default function ActivityPage() {
-  const lastReceipt = demoAccountData.receipts[demoAccountData.receipts.length - 1];
+  const { accountData, status } = useDashboardState();
+  const lastReceipt = accountData.receipts[accountData.receipts.length - 1];
 
   return (
     <div className="flex flex-col gap-5">
       <SectionIntro
-        eyebrow="Receipts and history"
+        eyebrow={
+          status === "preview"
+            ? "Preview receipts"
+            : status === "wrong_network"
+              ? "Wallet on wrong network"
+              : "Receipts and history"
+        }
         title="Follow deposits from payment to bucket."
-        copy="V1 can rely on event history for a readable receipt trail, so the product stays simple without a backend."
+        copy={
+          status === "live_empty"
+            ? "Your live receipt trail will begin after the first deposit, allocation, or withdrawal."
+            : "V1 can rely on event history for a readable receipt trail, so the product stays simple without a backend."
+        }
         compact
       />
 
@@ -29,7 +40,14 @@ export default function ActivityPage() {
           items={[
             {
               label: "Feed mode",
-              value: "Demo receipts",
+              value:
+                status === "preview"
+                  ? "Preview receipts"
+                  : status === "wrong_network"
+                    ? "Preview while disconnected"
+                    : status === "live_empty"
+                      ? "Waiting for first live event"
+                      : "Live receipts",
               tone: "olive",
             },
             {
@@ -39,7 +57,7 @@ export default function ActivityPage() {
             },
             {
               label: "Entries loaded",
-              value: `${demoAccountData.receipts.length} receipts`,
+              value: `${accountData.receipts.length} receipts`,
               tone: "orange",
             },
           ]}
@@ -54,7 +72,7 @@ export default function ActivityPage() {
       >
         <div className="w-full max-w-full overflow-hidden">
           <div className="h-[min(60vh,38rem)] overflow-hidden">
-            <ReceiptsTimeline receipts={demoAccountData.receipts} compact />
+            <ReceiptsTimeline receipts={accountData.receipts} compact />
           </div>
         </div>
       </motion.div>

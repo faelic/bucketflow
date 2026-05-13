@@ -54,12 +54,12 @@ export function BucketGrid({ balances }: BucketGridProps) {
       {bucketMeta.map((bucket) => (
         <article
           key={bucket.key}
-          className={`group rounded-[22px] border border-[var(--line)] bg-[linear-gradient(135deg,var(--panel),#ffffff)] p-3.5 shadow-[0_12px_30px_rgba(86,73,50,0.05)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(86,73,50,0.08)]`}
+          className={`group rounded-[12px] border border-[var(--line)] bg-[linear-gradient(135deg,var(--panel),#ffffff)] p-3.5 shadow-[0_12px_30px_rgba(86,73,50,0.05)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(86,73,50,0.08)]`}
         >
           <div className="flex items-start justify-between gap-4">
             <div>
               <span
-                className={`inline-flex rounded-full bg-gradient-to-r px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] ${bucket.tone}`}
+              className={`inline-flex rounded-full bg-gradient-to-r px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] ${bucket.tone}`}
               >
                 {bucket.marker}
               </span>
@@ -68,7 +68,7 @@ export function BucketGrid({ balances }: BucketGridProps) {
               </h3>
             </div>
             <span
-              className={`mt-1 inline-flex h-9 w-9 items-center justify-center rounded-[18px] ${bucket.accent} text-[10px] font-black uppercase tracking-[0.18em] text-white transition group-hover:scale-105`}
+              className={`mt-1 inline-flex h-9 w-9 items-center justify-center rounded-[10px] ${bucket.accent} text-[10px] font-black uppercase tracking-[0.18em] text-white transition group-hover:scale-105`}
             >
               {bucket.label.slice(0, 2)}
             </span>

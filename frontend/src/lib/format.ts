@@ -2,7 +2,15 @@ export function formatUsd(amount: number) {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-    maximumFractionDigits: 0,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 6,
+  }).format(amount);
+}
+
+export function formatTokenAmount(amount: number, maximumFractionDigits = 6) {
+  return new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits,
   }).format(amount);
 }
 
@@ -27,4 +35,16 @@ export function formatDateTimeLabel(value: string) {
 
 export function formatBpsAsPercent(bps: number) {
   return `${bps / 100}%`;
+}
+
+export function formatShortAddress(value?: string) {
+  if (!value) return "";
+
+  return `${value.slice(0, 6)}...${value.slice(-4)}`;
+}
+
+export function formatShortTransactionHash(value?: string) {
+  if (!value) return "";
+
+  return `${value.slice(0, 10)}...${value.slice(-6)}`;
 }

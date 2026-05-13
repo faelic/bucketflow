@@ -6,10 +6,10 @@ import { AnimatePresence, motion } from "motion/react";
 import type { ReactNode } from "react";
 
 import { AppTopbar } from "@/components/dashboard/AppTopbar";
+import { useDashboardState } from "@/components/dashboard/DashboardStateProvider";
 
 type DashboardFrameProps = {
   children: ReactNode;
-  mode: "demo" | "live";
 };
 
 const sections = [
@@ -39,14 +39,15 @@ const sections = [
   },
 ];
 
-export function DashboardFrame({ children, mode }: DashboardFrameProps) {
+export function DashboardFrame({ children }: DashboardFrameProps) {
   const pathname = usePathname();
+  const appState = useDashboardState();
 
   return (
     <main className="min-h-screen bg-[var(--surface)] text-[var(--ink)]">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8 lg:py-5">
-        <AppTopbar mode={mode} />
+      <AppTopbar appState={appState} />
 
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8 lg:py-5">
         <nav className="-mx-1 flex snap-x gap-3 overflow-x-auto px-1 pb-1 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0">
           {sections.map((section, index) => {
             const isActive = section.match.includes(pathname);
@@ -57,12 +58,12 @@ export function DashboardFrame({ children, mode }: DashboardFrameProps) {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, delay: 0.06 * index }}
-                className="min-w-[220px] snap-start lg:min-w-0"
+                className="min-w-[200px] snap-start sm:min-w-[220px] lg:min-w-0"
               >
                 <Link
                   href={section.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`group block rounded-[24px] border px-4 py-3 text-left transition active:scale-[0.99] ${
+                  className={`group block rounded-[12px] border px-3.5 py-3 text-left transition active:scale-[0.99] sm:px-4 ${
                     isActive
                       ? "border-[var(--accent-strong)] bg-[var(--accent-soft)] shadow-[0_18px_48px_rgba(116,138,61,0.14)]"
                       : "border-[var(--line)] bg-white hover:border-[var(--muted)] hover:bg-[var(--panel)] hover:shadow-[0_14px_34px_rgba(86,73,50,0.06)]"
@@ -71,7 +72,7 @@ export function DashboardFrame({ children, mode }: DashboardFrameProps) {
                   <p className="text-[10px] uppercase tracking-[0.32em] text-[var(--muted)]">
                     Section
                   </p>
-                  <h2 className="mt-2 text-lg font-bold tracking-tight text-[var(--ink)] transition group-hover:text-[var(--accent-strong)]">
+                  <h2 className="mt-2 text-base font-bold tracking-tight text-[var(--ink)] transition group-hover:text-[var(--accent-strong)] sm:text-lg">
                     {section.title}
                   </h2>
                   <p className="mt-1 text-xs leading-5 text-[var(--soft-ink)]">
@@ -83,7 +84,7 @@ export function DashboardFrame({ children, mode }: DashboardFrameProps) {
           })}
         </nav>
 
-        <div className="rounded-[30px] border border-[var(--line)] bg-white shadow-[0_22px_70px_rgba(86,73,50,0.08)]">
+        <div className="rounded-[12px] border border-[var(--line)] bg-white shadow-[0_22px_70px_rgba(86,73,50,0.08)]">
           <AnimatePresence mode="wait" initial={false}>
             <motion.section
               key={pathname}

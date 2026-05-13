@@ -1,8 +1,12 @@
 import type { ReactNode } from "react";
 
 import { DashboardFrame } from "@/components/dashboard/DashboardFrame";
-import { demoAccountData } from "@/data/demo-data";
+import { DashboardStateProvider } from "@/components/dashboard/DashboardStateProvider";
 
 export default function ProductLayout({ children }: { children: ReactNode }) {
-  return <DashboardFrame mode={demoAccountData.mode}>{children}</DashboardFrame>;
+  return (
+    <DashboardStateProvider>
+      <DashboardFrame>{children}</DashboardFrame>
+    </DashboardStateProvider>
+  );
 }

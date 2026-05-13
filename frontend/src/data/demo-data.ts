@@ -1,7 +1,15 @@
-import type { DemoAccountData } from "@/lib/types";
+import type { BucketBalances, DashboardAccountData } from "@/lib/types";
 
-export const demoAccountData: DemoAccountData = {
-    mode: "demo",
+const emptyBalances: BucketBalances = {
+    rent: 0,
+    savings: 0,
+    tax: 0,
+    familySupport: 0,
+    cashOut: 0,
+};
+
+export const previewAccountData: DashboardAccountData = {
+    mode: "preview",
     splitRule: {
         rent: 4000,
         savings: 2000,
@@ -48,4 +56,22 @@ export const demoAccountData: DemoAccountData = {
             status: "completed",
         },
     ],
+};
+
+export const liveEmptyAccountData: DashboardAccountData = {
+    mode: "live",
+    splitRule: {
+        rent: 4000,
+        savings: 2000,
+        tax: 1500,
+        familySupport: 1500,
+        cashOut: 1000,
+    },
+    balances: emptyBalances,
+    savingsCooldown: {
+        lastWithdrawalAt: null,
+        nextAllowedAt: null,
+        isLocked: false,
+    },
+    receipts: [],
 };

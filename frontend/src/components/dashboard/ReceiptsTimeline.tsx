@@ -1,5 +1,10 @@
 import type { ReceiptItem } from "@/lib/types";
-import { formatDateTimeLabel, formatUsd } from "@/lib/format";
+import {
+  formatDateTimeLabel,
+  formatShortTransactionHash,
+  formatUsd,
+} from "@/lib/format";
+import { SEPOLIA_TX_EXPLORER_BASE_URL } from "@/lib/contracts";
 
 type ReceiptsTimelineProps = {
   receipts: ReceiptItem[];
@@ -18,13 +23,21 @@ const kindDescription: Record<ReceiptItem["kind"], string> = {
   withdrawal: "Funds moved out to wallet",
 };
 
+const bucketLabel: Record<NonNullable<ReceiptItem["bucket"]>, string> = {
+  rent: "Rent",
+  savings: "Savings",
+  tax: "Tax",
+  familySupport: "Family Support",
+  cashOut: "Cash-out",
+};
+
 export function ReceiptsTimeline({
   receipts,
   compact = false,
 }: ReceiptsTimelineProps) {
   return (
     <section
-      className={`rounded-[22px] border border-[var(--line)] bg-[var(--panel)] shadow-[0_14px_36px_rgba(86,73,50,0.05)] ${
+      className={`rounded-[12px] border border-[var(--line)] bg-[var(--panel)] shadow-[0_14px_36px_rgba(86,73,50,0.05)] ${
         compact ? "flex h-full min-h-0 flex-col overflow-hidden p-4" : "p-5"
       }`}
     >
@@ -42,7 +55,7 @@ export function ReceiptsTimeline({
       </div>
 
       {receipts.length === 0 ? (
-        <div className="mt-4 rounded-[18px] border border-dashed border-[var(--line)] bg-white p-4 text-sm text-[var(--soft-ink)]">
+        <div className="mt-4 rounded-[10px] border border-dashed border-[var(--line)] bg-white p-4 text-sm text-[var(--soft-ink)]">
           No receipts yet.
         </div>
       ) : (
@@ -50,7 +63,7 @@ export function ReceiptsTimeline({
           {receipts.map((receipt) => (
             <article
               key={receipt.id}
-              className={`group rounded-[18px] border border-[var(--line)] bg-white transition hover:border-[rgba(116,138,61,0.28)] hover:shadow-[0_12px_28px_rgba(86,73,50,0.05)] ${compact ? "p-3.5" : "p-4"}`}
+              className={`group rounded-[10px] border border-[var(--line)] bg-white transition hover:border-[rgba(116,138,61,0.28)] hover:shadow-[0_12px_28px_rgba(86,73,50,0.05)] ${compact ? "p-3.5" : "p-4"}`}
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div className="flex items-start gap-3">
@@ -75,9 +88,19 @@ export function ReceiptsTimeline({
                     </p>
                     <p className="mt-1 text-xs text-[var(--soft-ink)]">
                       {receipt.bucket
-                        ? `Bucket: ${receipt.bucket}`
+                        ? `Bucket: ${bucketLabel[receipt.bucket]}`
                         : "Whole payment flow"}
                     </p>
+                    {receipt.transactionHash ? (
+                      <a
+                        href={`${SEPOLIA_TX_EXPLORER_BASE_URL}${receipt.transactionHash}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-2 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--action)] transition hover:text-[var(--action-strong)]"
+                      >
+                        View tx {formatShortTransactionHash(receipt.transactionHash)}
+                      </a>
+                    ) : null}
                   </div>
                 </div>
 

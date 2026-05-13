@@ -22,7 +22,7 @@ export function SummaryCards({
 
   return (
     <section className="grid gap-3 xl:grid-cols-[1.25fr_0.95fr]">
-      <article className="rounded-[28px] border border-[var(--line)] bg-[linear-gradient(135deg,#f5efe3_0%,#eef4de_100%)] p-5 shadow-[0_16px_42px_rgba(86,73,50,0.06)]">
+      <article className="rounded-[12px] border border-[var(--line)] bg-[linear-gradient(135deg,#f5efe3_0%,#eef4de_100%)] p-5 shadow-[0_16px_42px_rgba(86,73,50,0.06)]">
         <p className="text-[10px] uppercase tracking-[0.34em] text-[var(--muted)]">
           Total organized balance
         </p>
@@ -30,7 +30,7 @@ export function SummaryCards({
           {formatUsd(totalBalance)}
         </p>
         <div className="mt-5 grid gap-2.5 sm:grid-cols-2">
-          <div className="rounded-[18px] border border-white/70 bg-white/75 px-4 py-3">
+          <div className="rounded-[10px] border border-white/70 bg-white/75 px-4 py-3">
             <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
               Savings balance
             </p>
@@ -38,7 +38,7 @@ export function SummaryCards({
               {formatUsd(balances.savings)}
             </p>
           </div>
-          <div className="rounded-[18px] border border-white/70 bg-white/75 px-4 py-3">
+          <div className="rounded-[10px] border border-white/70 bg-white/75 px-4 py-3">
             <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
               Receipts
             </p>
@@ -50,7 +50,7 @@ export function SummaryCards({
       </article>
 
       <div className="grid gap-3">
-        <article className="rounded-[24px] border border-[rgba(116,138,61,0.2)] bg-[var(--accent-soft)] p-4 shadow-[0_14px_36px_rgba(86,73,50,0.05)]">
+        <article className="rounded-[12px] border border-[rgba(116,138,61,0.2)] bg-[var(--accent-soft)] p-4 shadow-[0_14px_36px_rgba(86,73,50,0.05)]">
           <div className="flex items-center gap-2 text-[var(--muted)]">
             <AppIcon name="clock" className="h-4 w-4" />
             <p className="text-[10px] uppercase tracking-[0.34em]">
@@ -63,11 +63,11 @@ export function SummaryCards({
           <p className="mt-1.5 text-xs leading-5 text-[var(--soft-ink)]">
             {savingsCooldown.lastWithdrawalAt
               ? "Based on your last savings withdrawal"
-              : "No prior savings withdrawal"}
+              : "Cooldown starts after your first savings withdrawal"}
           </p>
         </article>
 
-        <article className="rounded-[24px] border border-[var(--line)] bg-[var(--panel)] p-4 shadow-[0_14px_36px_rgba(86,73,50,0.05)]">
+        <article className="rounded-[12px] border border-[var(--line)] bg-[var(--panel)] p-4 shadow-[0_14px_36px_rgba(86,73,50,0.05)]">
           <div className="flex items-start justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 text-[var(--muted)]">
@@ -91,7 +91,7 @@ export function SummaryCards({
           <p className="mt-1.5 text-xs leading-5 text-[var(--soft-ink)]">
             {savingsCooldown.isLocked
               ? "Cooldown is active to protect long-term savings discipline."
-              : "Savings can be withdrawn now."}
+              : "Savings is available until you make a savings withdrawal."}
           </p>
         </article>
       </div>

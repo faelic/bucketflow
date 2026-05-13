@@ -5,6 +5,14 @@ export type BucketKey =
     | "familySupport"
     | "cashOut";
 
+export type AppMode = "preview" | "live";
+export type AppStatus =
+    | "preview"
+    | "connecting"
+    | "wrong_network"
+    | "live_empty"
+    | "live_ready";
+
 export type SplitRule = {
     rent: number;
     savings: number;
@@ -36,13 +44,25 @@ export type ReceiptItem = {
     amount: number;
     bucket?: BucketKey;
     timestamp: string;
+    transactionHash?: string;
     status: "completed";
 };
 
-export type DemoAccountData = {
-    mode: "demo";
+export type DashboardAccountData = {
+    mode: AppMode;
     splitRule: SplitRule;
     balances: BucketBalances;
     receipts: ReceiptItem[];
     savingsCooldown: SavingsCooldown;
+};
+
+export type DashboardViewState = {
+    mode: AppMode;
+    status: AppStatus;
+    accountData: DashboardAccountData;
+    isConnected: boolean;
+    isSupportedChain: boolean;
+    supportsWrites: boolean;
+    address?: `0x${string}`;
+    chainId?: number;
 };

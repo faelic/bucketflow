@@ -11,17 +11,37 @@ export function SplitRulePanel({
   compact = false,
 }: SplitRulePanelProps) {
   const rules = [
-    { label: "Rent", value: splitRule.rent },
-    { label: "Savings", value: splitRule.savings },
-    { label: "Tax", value: splitRule.tax },
-    { label: "Family Support", value: splitRule.familySupport },
-    { label: "Cash-out", value: splitRule.cashOut },
+    {
+      label: "Rent",
+      value: splitRule.rent,
+      tone: "border-[rgba(116,138,61,0.18)] bg-[var(--accent-soft)] text-[var(--accent-strong)]",
+    },
+    {
+      label: "Savings",
+      value: splitRule.savings,
+      tone: "border-[rgba(116,138,61,0.18)] bg-[#edf5d7] text-[#6d7f2d]",
+    },
+    {
+      label: "Tax",
+      value: splitRule.tax,
+      tone: "border-[rgba(194,131,56,0.18)] bg-[#f4ebdb] text-[#9a6b2f]",
+    },
+    {
+      label: "Family Support",
+      value: splitRule.familySupport,
+      tone: "border-[rgba(139,117,88,0.18)] bg-[#eee8de] text-[#7a6750]",
+    },
+    {
+      label: "Cash-out",
+      value: splitRule.cashOut,
+      tone: "border-[rgba(230,120,63,0.18)] bg-[#fbe8dc] text-[var(--action-strong)]",
+    },
   ];
 
   const totalBps = rules.reduce((sum, rule) => sum + rule.value, 0);
 
   return (
-    <section className="rounded-[22px] border border-[var(--line)] bg-[var(--panel)] p-4 shadow-[0_12px_30px_rgba(86,73,50,0.05)]">
+    <section className="rounded-[12px] border border-[var(--line)] bg-[var(--panel)] p-4 shadow-[0_12px_30px_rgba(86,73,50,0.05)]">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-[10px] uppercase tracking-[0.34em] text-[var(--muted)]">
@@ -37,18 +57,22 @@ export function SplitRulePanel({
         </div>
       </div>
 
-      <div className={`mt-3 ${compact ? "space-y-2" : "grid gap-2 sm:grid-cols-2"}`}>
+      <div
+        className={`mt-3 grid gap-2.5 ${
+          compact ? "sm:grid-cols-2 xl:grid-cols-5" : "sm:grid-cols-2 xl:grid-cols-5"
+        }`}
+      >
         {rules.map((rule) => (
           <div
             key={rule.label}
-            className="flex items-center justify-between rounded-[16px] border border-[var(--line)] bg-white px-3.5 py-2.5"
+            className={`rounded-[10px] border px-3.5 py-3 ${rule.tone}`}
           >
-            <span className="text-sm font-medium text-[var(--soft-ink)]">
+            <p className="text-[10px] uppercase tracking-[0.28em] opacity-70">
               {rule.label}
-            </span>
-            <span className="text-sm font-black tracking-tight text-[var(--ink)]">
+            </p>
+            <p className="mt-1.5 text-sm font-black tracking-tight">
               {formatBpsAsPercent(rule.value)}
-            </span>
+            </p>
           </div>
         ))}
       </div>
