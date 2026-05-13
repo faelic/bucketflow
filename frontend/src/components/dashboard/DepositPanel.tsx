@@ -211,13 +211,12 @@ export function DepositPanel() {
             Deposit USDC
           </h2>
           <p className="mt-2 text-sm leading-6 text-[var(--soft-ink)]">
-            Approve Sepolia USDC once, then deposit into BucketFlow so the
-            contract can split the amount across your saved rule.
+            Approve once, then deposit USDC into your saved split.
           </p>
         </div>
 
-        <div className="rounded-[10px] border border-[var(--line)] bg-white px-4 py-3 text-right">
-          <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
+        <div className="rounded-[10px] border border-[var(--line)] bg-[var(--panel-soft)] px-4 py-3 text-left sm:text-right">
+          <p className="text-[9px] uppercase tracking-[0.22em] text-[var(--muted)] sm:text-[10px] sm:tracking-[0.28em]">
             Wallet balance
           </p>
           <p className="mt-1 text-lg font-black tracking-tight text-[var(--ink)]">
@@ -258,8 +257,8 @@ export function DepositPanel() {
           />
         </label>
 
-        <div className="rounded-[10px] border border-[var(--line)] bg-white px-4 py-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--muted)]">
+        <div className="rounded-[10px] border border-[var(--line)] bg-[var(--panel-soft)] px-4 py-3">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--muted)] sm:text-xs sm:tracking-[0.24em]">
             Approval status
           </p>
           <p className="mt-3 text-sm font-black tracking-tight text-[var(--ink)]">
@@ -269,9 +268,9 @@ export function DepositPanel() {
                 ? "Approval required"
                 : "Ready to deposit"}
           </p>
-          <p className="mt-1 text-xs leading-5 text-[var(--soft-ink)]">
+          <p className="mt-1 text-[11px] leading-5 text-[var(--soft-ink)] sm:text-xs">
             {!hasRuleSet
-              ? "Save a live split rule first so the vault knows how to organize this deposit."
+              ? "Save a live split rule first."
               : `Remaining allowance: ${formatTokenAmountWithDecimals(currentAllowance, tokenDecimals)} USDC`}
           </p>
         </div>
@@ -280,12 +279,12 @@ export function DepositPanel() {
       <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="text-sm text-[var(--soft-ink)]">
           {!hasRuleSet
-            ? "Set your live split rule before approving or depositing USDC."
+            ? "Set your split rule first."
             : exceedsBalance
-            ? "Deposit amount is higher than your wallet balance."
+            ? "Amount exceeds wallet balance."
             : needsApproval
-              ? "Approve the vault before the deposit transaction can go through."
-              : "Once deposited, BucketFlow allocates the amount using your onchain split rule."}
+              ? "Approval required before deposit."
+              : "Deposit using your saved onchain split."}
         </div>
         <div className="grid grid-cols-1 gap-3 sm:flex sm:flex-wrap">
           {!hasRuleSet ? (
@@ -358,12 +357,12 @@ export function DepositPanel() {
       </div>
 
       {writeErrorMessage ? (
-        <p className="mt-3 rounded-[10px] border border-[rgba(230,120,63,0.2)] bg-[#fbe8dc] px-4 py-3 text-sm text-[var(--action-strong)]">
+        <p className="mt-3 rounded-[10px] border border-[rgba(230,120,63,0.2)] bg-[#fbe8dc] px-4 py-3 text-[13px] leading-5 text-[var(--action-strong)] sm:text-sm">
           {writeErrorMessage}
         </p>
       ) : isDepositSuccess ? (
-        <div className="mt-3 rounded-[10px] border border-[rgba(116,138,61,0.2)] bg-[var(--accent-soft)] px-4 py-3 text-sm text-[var(--accent-strong)]">
-          <p>Deposit confirmed onchain.</p>
+        <div className="mt-3 rounded-[10px] border border-[rgba(116,138,61,0.2)] bg-[var(--accent-soft)] px-4 py-3 text-[13px] leading-5 text-[var(--accent-strong)] sm:text-sm">
+          <p>Deposit confirmed.</p>
           {depositHash ? (
             <a
               href={`${SEPOLIA_TX_EXPLORER_BASE_URL}${depositHash}`}

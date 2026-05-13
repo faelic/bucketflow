@@ -129,7 +129,7 @@ export function SplitRuleEditor() {
           : "Live rule ready";
 
   const helperCopy = isValid
-    ? "This split is valid. Save it onchain when you are ready."
+    ? "Split totals 100%. Save when you are ready."
     : "The five buckets must total 100%.";
 
   const writeErrorMessage = useMemo(() => {
@@ -166,13 +166,12 @@ export function SplitRuleEditor() {
             Edit split rule
           </h2>
           <p className="mt-2 text-sm leading-6 text-[var(--soft-ink)]">
-            {statusLabel}. Set how each new deposit should flow across Rent,
-            Savings, Tax, Family Support, and Cash-out.
+            {statusLabel}. Choose how each new deposit should be split.
           </p>
         </div>
 
-        <div className="rounded-[10px] border border-[var(--line)] bg-white px-4 py-3 text-right">
-          <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
+        <div className="rounded-[10px] border border-[var(--line)] bg-[var(--panel-soft)] px-4 py-3 text-left sm:text-right">
+          <p className="text-[9px] uppercase tracking-[0.22em] text-[var(--muted)] sm:text-[10px] sm:tracking-[0.28em]">
             Total
           </p>
           <p
@@ -221,7 +220,7 @@ export function SplitRuleEditor() {
       </div>
 
       <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-[var(--soft-ink)]">{helperCopy}</p>
+        <p className="text-[13px] leading-5 text-[var(--soft-ink)] sm:text-sm">{helperCopy}</p>
         <div className="grid grid-cols-1 gap-3 sm:flex sm:flex-wrap">
           <button
             type="button"
@@ -248,11 +247,11 @@ export function SplitRuleEditor() {
       </div>
 
       {writeErrorMessage ? (
-        <p className="mt-3 rounded-[10px] border border-[rgba(230,120,63,0.2)] bg-[#fbe8dc] px-4 py-3 text-sm text-[var(--action-strong)]">
+        <p className="mt-3 rounded-[10px] border border-[rgba(230,120,63,0.2)] bg-[#fbe8dc] px-4 py-3 text-[13px] leading-5 text-[var(--action-strong)] sm:text-sm">
           {writeErrorMessage}
         </p>
       ) : isSuccess ? (
-        <div className="mt-3 rounded-[10px] border border-[rgba(116,138,61,0.2)] bg-[var(--accent-soft)] px-4 py-3 text-sm text-[var(--accent-strong)]">
+        <div className="mt-3 rounded-[10px] border border-[rgba(116,138,61,0.2)] bg-[var(--accent-soft)] px-4 py-3 text-[13px] leading-5 text-[var(--accent-strong)] sm:text-sm">
           <p>Split rule saved onchain.</p>
           {hash ? (
             <a

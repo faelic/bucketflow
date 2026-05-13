@@ -44,12 +44,12 @@ export default function AppPage() {
 
   const copy =
     status === "preview"
-      ? "Explore the structure with a sample workspace before connecting a wallet."
+      ? "Explore the structure before connecting a wallet."
       : status === "wrong_network"
-        ? "A wallet is connected, but you need Sepolia before BucketFlow can unlock live actions."
+        ? "Switch to Sepolia to unlock live actions."
         : status === "live_empty"
-          ? "Your wallet is connected on Sepolia. Live balances and receipts will appear after your first onchain activity."
-          : "Your live bucket balances, receipts, and savings state are active.";
+          ? "Deposit once to begin live balances and receipts."
+          : "Track balances, savings status, and your next action.";
 
   return (
     <div className="flex h-full min-h-0 flex-col gap-4">
@@ -88,7 +88,7 @@ export default function AppPage() {
                 Choose what you want to do
               </h2>
               <p className="mt-1.5 text-sm leading-6 text-[var(--soft-ink)]">
-                Open only the live flow you need, or jump to your split rules.
+                Deposit, withdraw, or update your split.
               </p>
             </div>
 
@@ -148,6 +148,11 @@ export default function AppPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.12, ease: "easeOut" }}
         >
+          <div className="mb-3 rounded-[10px] border border-[rgba(116,138,61,0.16)] bg-[var(--accent-soft)] px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--accent-strong)] sm:hidden">
+            {activePanel === "deposit"
+              ? "Deposit mode active"
+              : "Withdraw mode active"}
+          </div>
           {activePanel === "deposit" ? <DepositPanel /> : <WithdrawPanel />}
         </motion.div>
       ) : null}

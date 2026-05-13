@@ -35,6 +35,7 @@ export default function ActivityPage() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, delay: 0.04 }}
+        className="hidden sm:block"
       >
         <StatusStrip
           items={[
@@ -71,7 +72,7 @@ export default function ActivityPage() {
         className="flex overflow-hidden"
       >
         <div className="w-full max-w-full overflow-hidden">
-          <div className="h-[min(60vh,38rem)] overflow-hidden">
+          <div className="h-[min(66vh,40rem)] overflow-hidden sm:h-[min(60vh,38rem)]">
             <ReceiptsTimeline receipts={accountData.receipts} compact />
           </div>
         </div>

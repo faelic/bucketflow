@@ -152,10 +152,10 @@ export function WithdrawPanel() {
         accountData.savingsCooldown.nextAllowedAt,
       )}.`
     : selectedBucket === "savings"
-      ? "Savings stays available until you make a savings withdrawal. That first withdrawal starts the 30-day cooldown."
+      ? "First savings withdrawal starts the 30-day cooldown."
     : exceedsBucketBalance
-      ? "Withdrawal amount is higher than the selected bucket balance."
-      : "Withdraw only from the bucket that matches the priority you need today.";
+      ? "Amount exceeds this bucket balance."
+      : "Withdraw only from the bucket you need.";
 
   const writeErrorMessage =
     getWithdrawErrorMessage(error ?? null) ?? amountError;
@@ -174,13 +174,12 @@ export function WithdrawPanel() {
             Withdraw from a bucket
           </h2>
           <p className="mt-2 text-sm leading-6 text-[var(--soft-ink)]">
-            Choose the bucket you need, enter the amount, and withdraw USDC
-            back to your wallet.
+            Choose a bucket, enter an amount, and withdraw USDC.
           </p>
         </div>
 
-        <div className="rounded-[10px] border border-[var(--line)] bg-white px-4 py-3 text-right">
-          <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
+        <div className="rounded-[10px] border border-[var(--line)] bg-[var(--panel-soft)] px-4 py-3 text-left sm:text-right">
+          <p className="text-[9px] uppercase tracking-[0.22em] text-[var(--muted)] sm:text-[10px] sm:tracking-[0.28em]">
             Bucket balance
           </p>
           <p className="mt-1 text-lg font-black tracking-tight text-[var(--ink)]">
@@ -241,7 +240,7 @@ export function WithdrawPanel() {
       </div>
 
       <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="text-sm text-[var(--soft-ink)]">
+        <div className="text-[13px] leading-5 text-[var(--soft-ink)] sm:text-sm">
           {helperCopy}
         </div>
         <div className="grid grid-cols-1 gap-3 sm:flex sm:flex-wrap">
@@ -280,12 +279,12 @@ export function WithdrawPanel() {
       </div>
 
       {writeErrorMessage ? (
-        <p className="mt-3 rounded-[10px] border border-[rgba(230,120,63,0.2)] bg-[#fbe8dc] px-4 py-3 text-sm text-[var(--action-strong)]">
+        <p className="mt-3 rounded-[10px] border border-[rgba(230,120,63,0.2)] bg-[#fbe8dc] px-4 py-3 text-[13px] leading-5 text-[var(--action-strong)] sm:text-sm">
           {writeErrorMessage}
         </p>
       ) : isSuccess ? (
-        <div className="mt-3 rounded-[10px] border border-[rgba(116,138,61,0.2)] bg-[var(--accent-soft)] px-4 py-3 text-sm text-[var(--accent-strong)]">
-          <p>Withdrawal confirmed onchain.</p>
+        <div className="mt-3 rounded-[10px] border border-[rgba(116,138,61,0.2)] bg-[var(--accent-soft)] px-4 py-3 text-[13px] leading-5 text-[var(--accent-strong)] sm:text-sm">
+          <p>Withdrawal confirmed.</p>
           {withdrawHash ? (
             <a
               href={`${SEPOLIA_TX_EXPLORER_BASE_URL}${withdrawHash}`}
