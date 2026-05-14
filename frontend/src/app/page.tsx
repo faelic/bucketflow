@@ -90,7 +90,7 @@ export default function Home() {
 
           <Link
             href="/app"
-            className="rounded-[10px] border border-[var(--accent-strong)] bg-[var(--accent-strong)] px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-[var(--accent)] sm:px-5 sm:text-xs sm:tracking-[0.25em]"
+            className="rounded-[10px] border border-[var(--accent-strong)] bg-[var(--accent-strong)] px-3.5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent)] sm:px-5 sm:text-xs sm:tracking-[0.25em]"
           >
             Explore App
           </Link>
@@ -98,13 +98,13 @@ export default function Home() {
       </section>
 
       <section className="hero-grid relative overflow-hidden">
-        <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 pb-10 pt-6 sm:px-6 md:pb-16 md:pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:px-8 lg:pb-20 lg:pt-20">
+        <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 pb-8 pt-6 sm:px-6 md:gap-10 md:pb-16 md:pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:px-8 lg:pb-20 lg:pt-20">
           <div className="relative z-10">
 
-            <h1 className="max-w-3xl text-[2.75rem] font-black leading-[0.95] tracking-tight text-[var(--accent-strong)] sm:text-6xl lg:text-7xl">
+            <h1 className="max-w-3xl text-[2.45rem] font-black leading-[0.96] tracking-tight text-[var(--accent-strong)] sm:text-6xl lg:text-7xl">
               Organize your stablecoin income.
             </h1>
-            <p className="mt-5 max-w-xl text-sm leading-7 text-[var(--soft-ink)] sm:text-lg sm:leading-8">
+            <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--soft-ink)] sm:mt-5 sm:text-lg sm:leading-8">
               <span className="sm:hidden">
                 Turn incoming USDC into a calm system for rent, savings, tax, family support, and cash-out.
               </span>
@@ -115,38 +115,38 @@ export default function Home() {
               </span>
             </p>
 
-            <div className="mt-10 flex justify-center sm:justify-start">
+            <div className="mt-8 flex justify-start sm:mt-10">
               <Link
                 href="/app"
-                className="inline-flex items-center justify-center self-center rounded-[10px] bg-[var(--action)] px-7 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:translate-y-[-1px] hover:bg-[var(--action-strong)] sm:self-auto"
+                className="inline-flex items-center justify-center rounded-[10px] bg-[var(--action)] px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:translate-y-[-1px] hover:bg-[var(--action-strong)] sm:px-7 sm:py-4 sm:tracking-[0.2em]"
               >
                 Launch App
               </Link>
 
             </div>
 
-            <div className="mt-8 grid gap-3 sm:mt-10 sm:grid-cols-3">
-              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-3.5 shadow-[0_14px_32px_rgba(86,73,50,0.05)] sm:py-4">
+            <div className="mt-7 grid gap-2.5 sm:mt-10 sm:grid-cols-3 sm:gap-3">
+              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-3 shadow-[0_12px_28px_rgba(86,73,50,0.05)] sm:py-4">
                 <p className="text-[9px] uppercase tracking-[0.18em] text-[var(--muted)] sm:text-[10px] sm:tracking-[0.28em]">
                   Supported flow
                 </p>
-                <p className="mt-2 text-sm font-black tracking-tight text-[var(--ink)]">
+                <p className="mt-1.5 text-[13px] font-black tracking-tight text-[var(--ink)] sm:mt-2 sm:text-sm">
                   Deposit → Organize → Withdraw
                 </p>
               </div>
-              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-3.5 shadow-[0_14px_32px_rgba(86,73,50,0.05)] sm:py-4">
+              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-3 shadow-[0_12px_28px_rgba(86,73,50,0.05)] sm:py-4">
                 <p className="text-[9px] uppercase tracking-[0.18em] text-[var(--muted)] sm:text-[10px] sm:tracking-[0.28em]">
                   Savings logic
                 </p>
-                <p className="mt-2 text-sm font-black tracking-tight text-[var(--ink)]">
+                <p className="mt-1.5 text-[13px] font-black tracking-tight text-[var(--ink)] sm:mt-2 sm:text-sm">
                   30-day withdrawal cooldown
                 </p>
               </div>
-              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-3.5 shadow-[0_14px_32px_rgba(86,73,50,0.05)] sm:py-4">
+              <div className="rounded-[12px] border border-[var(--line)] bg-white/70 px-4 py-3 shadow-[0_12px_28px_rgba(86,73,50,0.05)] sm:py-4">
                 <p className="text-[9px] uppercase tracking-[0.18em] text-[var(--muted)] sm:text-[10px] sm:tracking-[0.28em]">
                   V1 network
                 </p>
-                <p className="mt-2 text-sm font-black tracking-tight text-[var(--ink)]">
+                <p className="mt-1.5 text-[13px] font-black tracking-tight text-[var(--ink)] sm:mt-2 sm:text-sm">
                   USDC on Sepolia
                 </p>
               </div>
