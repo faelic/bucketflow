@@ -9,6 +9,13 @@ The current V1 is built around:
 - event-based receipts and activity history
 - a 30-day savings withdrawal cooldown
 
+## Live App
+
+Try the current frontend deployment here:
+
+[BucketFlow on Vercel](https://bucketflow-tau.vercel.app/)
+
+
 ## What It Does
 
 BucketFlow helps a user:
