@@ -118,7 +118,9 @@ export function DashboardStateProvider({
     }
 
     const hasLiveData =
-      liveAccountQuery.hasRuleSet || liveAccountQuery.hasAnyBalance;
+      liveAccountQuery.hasRuleSet ||
+      liveAccountQuery.hasAnyBalance ||
+      (liveAccountData.receipts.length > 0);
 
     return {
       mode: "live",

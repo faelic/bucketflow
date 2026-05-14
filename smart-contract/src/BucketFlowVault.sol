@@ -248,8 +248,8 @@ contract BucketFlowVault is ReentrancyGuard {
         uint256 rentAmount = (actualReceived * rule.rentBps) / 10_000;
         uint256 savingsAmount = (actualReceived * rule.savingsBps) / 10_000;
         uint256 taxAmount = (actualReceived * rule.taxBps) / 10_000;
-        uint256 familySupportAmount = (actualReceived *
-            rule.familySupportBps) / 10_000;
+        uint256 familySupportAmount = (actualReceived * rule.familySupportBps) /
+            10_000;
         uint256 cashOutAmount = (actualReceived * rule.cashOutBps) / 10_000;
 
         uint256 allocatedTotal = rentAmount +

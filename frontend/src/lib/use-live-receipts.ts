@@ -8,6 +8,7 @@ import {
   BUCKETFLOW_VAULT_ADDRESS,
   BUCKETFLOW_VAULT_DEPLOYMENT_BLOCK,
 } from "@/lib/contracts";
+import { mergeReceipts, readLocalReceipts } from "@/lib/receipt-log-utils";
 import type { BucketKey, ReceiptItem } from "@/lib/types";
 
 const depositedEvent = parseAbiItem(
@@ -68,116 +69,139 @@ export function useLiveReceipts({
 
   return useQuery({
     queryKey: ["bucketflow-live-receipts", address, tokenDecimals],
-    enabled: enabled && !!address && !!publicClient,
+    enabled: enabled && !!address,
     queryFn: async (): Promise<ReceiptItem[]> => {
-      if (!address || !publicClient) {
+      if (!address) {
         return [];
       }
 
-      const [depositedLogs, allocatedLogs, withdrawnLogs] = await Promise.all([
-        publicClient.getLogs({
-          address: BUCKETFLOW_VAULT_ADDRESS,
-          event: depositedEvent,
-          args: { user: address },
-          fromBlock: BUCKETFLOW_VAULT_DEPLOYMENT_BLOCK,
-          toBlock: "latest",
-        }),
-        publicClient.getLogs({
-          address: BUCKETFLOW_VAULT_ADDRESS,
-          event: incomeAllocatedEvent,
-          args: { user: address },
-          fromBlock: BUCKETFLOW_VAULT_DEPLOYMENT_BLOCK,
-          toBlock: "latest",
-        }),
-        publicClient.getLogs({
-          address: BUCKETFLOW_VAULT_ADDRESS,
-          event: withdrawnEvent,
-          args: { user: address },
-          fromBlock: BUCKETFLOW_VAULT_DEPLOYMENT_BLOCK,
-          toBlock: "latest",
-        }),
-      ]);
+      const localReceipts = readLocalReceipts(address);
 
-      const allLogs = [...depositedLogs, ...allocatedLogs, ...withdrawnLogs].sort(
-        compareLogs,
-      );
+      if (!publicClient) {
+        return localReceipts;
+      }
 
-      const uniqueBlockNumbers = Array.from(
-        new Set(
-          allLogs
-            .map((log) => log.blockNumber)
-            .filter((blockNumber): blockNumber is bigint => blockNumber !== null),
-        ),
-      );
+      const normalizedAddress = address.toLowerCase();
 
-      const blocks = await Promise.all(
-        uniqueBlockNumbers.map((blockNumber) =>
-          publicClient.getBlock({ blockNumber }),
-        ),
-      );
+      try {
+        const [depositedLogs, allocatedLogs, withdrawnLogs] = await Promise.all([
+          publicClient.getLogs({
+            address: BUCKETFLOW_VAULT_ADDRESS,
+            event: depositedEvent,
+            fromBlock: BUCKETFLOW_VAULT_DEPLOYMENT_BLOCK,
+            toBlock: "latest",
+          }),
+          publicClient.getLogs({
+            address: BUCKETFLOW_VAULT_ADDRESS,
+            event: incomeAllocatedEvent,
+            fromBlock: BUCKETFLOW_VAULT_DEPLOYMENT_BLOCK,
+            toBlock: "latest",
+          }),
+          publicClient.getLogs({
+            address: BUCKETFLOW_VAULT_ADDRESS,
+            event: withdrawnEvent,
+            fromBlock: BUCKETFLOW_VAULT_DEPLOYMENT_BLOCK,
+            toBlock: "latest",
+          }),
+        ]);
 
-      const blockTimestampByNumber = new Map(
-        blocks.map((block) => [
-          block.number,
-          new Date(Number(block.timestamp) * 1000).toISOString(),
-        ]),
-      );
+        const userDepositedLogs = depositedLogs.filter(
+          (log) => log.args.user?.toLowerCase() === normalizedAddress,
+        );
+        const userAllocatedLogs = allocatedLogs.filter(
+          (log) => log.args.user?.toLowerCase() === normalizedAddress,
+        );
+        const userWithdrawnLogs = withdrawnLogs.filter(
+          (log) => log.args.user?.toLowerCase() === normalizedAddress,
+        );
 
-      const depositReceipts: ReceiptItem[] = depositedLogs.map((log) => ({
-        id: `${log.transactionHash}-${log.logIndex ?? 0}`,
-        kind: "deposit",
-        title: "USDC deposit received",
-        amount: rawToDisplayAmount(log.args.amount ?? ZERO, tokenDecimals),
-        timestamp:
-          blockTimestampByNumber.get(log.blockNumber ?? ZERO) ??
-          new Date().toISOString(),
-        transactionHash: log.transactionHash,
-        status: "completed",
-      }));
+        const allLogs = [
+          ...userDepositedLogs,
+          ...userAllocatedLogs,
+          ...userWithdrawnLogs,
+        ].sort(compareLogs);
 
-      const allocationReceipts: ReceiptItem[] = allocatedLogs.map((log) => {
-        const rent = log.args.rent ?? ZERO;
-        const savings = log.args.savings ?? ZERO;
-        const tax = log.args.tax ?? ZERO;
-        const familySupport = log.args.familySupport ?? ZERO;
-        const cashOut = log.args.cashOut ?? ZERO;
-
-        return {
-          id: `${log.transactionHash}-${log.logIndex ?? 0}`,
-          kind: "allocation",
-          title: "Deposit split across buckets",
-          amount: rawToDisplayAmount(
-            rent + savings + tax + familySupport + cashOut,
-            tokenDecimals,
+        const uniqueBlockNumbers = Array.from(
+          new Set(
+            allLogs
+              .map((log) => log.blockNumber)
+              .filter((blockNumber): blockNumber is bigint => blockNumber !== null),
           ),
-          timestamp:
-            blockTimestampByNumber.get(log.blockNumber ?? ZERO) ??
-            new Date().toISOString(),
-          transactionHash: log.transactionHash,
-          status: "completed",
-        };
-      });
+        );
 
-      const withdrawalReceipts: ReceiptItem[] = withdrawnLogs.map((log) => {
-        const bucket = bucketIdToKey[Number(log.args.bucket ?? 4)] ?? "cashOut";
+        const blocks = await Promise.all(
+          uniqueBlockNumbers.map((blockNumber) =>
+            publicClient.getBlock({ blockNumber }),
+          ),
+        );
 
-        return {
+        const blockTimestampByNumber = new Map(
+          blocks.map((block) => [
+            block.number,
+            new Date(Number(block.timestamp) * 1000).toISOString(),
+          ]),
+        );
+
+        const depositReceipts: ReceiptItem[] = userDepositedLogs.map((log) => ({
           id: `${log.transactionHash}-${log.logIndex ?? 0}`,
-          kind: "withdrawal",
-          title: `${bucketLabel[bucket]} withdrawal`,
+          kind: "deposit",
+          title: "USDC deposit received",
           amount: rawToDisplayAmount(log.args.amount ?? ZERO, tokenDecimals),
-          bucket,
           timestamp:
             blockTimestampByNumber.get(log.blockNumber ?? ZERO) ??
             new Date().toISOString(),
           transactionHash: log.transactionHash,
           status: "completed",
-        };
-      });
+        }));
 
-      return [...depositReceipts, ...allocationReceipts, ...withdrawalReceipts].sort(
-        (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
-      );
+        const allocationReceipts: ReceiptItem[] = userAllocatedLogs.map((log) => {
+          const rent = log.args.rent ?? ZERO;
+          const savings = log.args.savings ?? ZERO;
+          const tax = log.args.tax ?? ZERO;
+          const familySupport = log.args.familySupport ?? ZERO;
+          const cashOut = log.args.cashOut ?? ZERO;
+
+          return {
+            id: `${log.transactionHash}-${log.logIndex ?? 0}`,
+            kind: "allocation",
+            title: "Deposit split across buckets",
+            amount: rawToDisplayAmount(
+              rent + savings + tax + familySupport + cashOut,
+              tokenDecimals,
+            ),
+            timestamp:
+              blockTimestampByNumber.get(log.blockNumber ?? ZERO) ??
+              new Date().toISOString(),
+            transactionHash: log.transactionHash,
+            status: "completed",
+          };
+        });
+
+        const withdrawalReceipts: ReceiptItem[] = userWithdrawnLogs.map((log) => {
+          const bucket = bucketIdToKey[Number(log.args.bucket ?? 4)] ?? "cashOut";
+
+          return {
+            id: `${log.transactionHash}-${log.logIndex ?? 0}`,
+            kind: "withdrawal",
+            title: `${bucketLabel[bucket]} withdrawal`,
+            amount: rawToDisplayAmount(log.args.amount ?? ZERO, tokenDecimals),
+            bucket,
+            timestamp:
+              blockTimestampByNumber.get(log.blockNumber ?? ZERO) ??
+              new Date().toISOString(),
+            transactionHash: log.transactionHash,
+            status: "completed",
+          };
+        });
+
+        const fetchedReceipts = [...depositReceipts, ...allocationReceipts, ...withdrawalReceipts].sort(
+          (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
+        );
+
+        return mergeReceipts(fetchedReceipts, localReceipts);
+      } catch {
+        return localReceipts;
+      }
     },
     staleTime: 15_000,
   });

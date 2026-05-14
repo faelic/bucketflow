@@ -9,7 +9,7 @@ import { StatusStrip } from "@/components/dashboard/StatusStrip";
 import { formatDateTimeLabel } from "@/lib/format";
 
 export default function ActivityPage() {
-  const { accountData, status } = useDashboardState();
+  const { accountData, status, address } = useDashboardState();
   const lastReceipt = accountData.receipts[accountData.receipts.length - 1];
 
   return (
@@ -73,7 +73,12 @@ export default function ActivityPage() {
       >
         <div className="w-full max-w-full overflow-hidden">
           <div className="h-[min(66vh,40rem)] overflow-hidden sm:h-[min(60vh,38rem)]">
-            <ReceiptsTimeline receipts={accountData.receipts} compact />
+            <ReceiptsTimeline
+              receipts={accountData.receipts}
+              compact
+              address={address}
+              isLive={status !== "preview" && status !== "wrong_network"}
+            />
           </div>
         </div>
       </motion.div>

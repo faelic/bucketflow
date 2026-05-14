@@ -1,6 +1,7 @@
 import type { ReceiptItem } from "@/lib/types";
 import {
   formatDateTimeLabel,
+  formatShortAddress,
   formatShortTransactionHash,
   formatUsd,
 } from "@/lib/format";
@@ -9,6 +10,8 @@ import { SEPOLIA_TX_EXPLORER_BASE_URL } from "@/lib/contracts";
 type ReceiptsTimelineProps = {
   receipts: ReceiptItem[];
   compact?: boolean;
+  address?: `0x${string}`;
+  isLive?: boolean;
 };
 
 const kindLabel: Record<ReceiptItem["kind"], string> = {
@@ -34,6 +37,8 @@ const bucketLabel: Record<NonNullable<ReceiptItem["bucket"]>, string> = {
 export function ReceiptsTimeline({
   receipts,
   compact = false,
+  address,
+  isLive = false,
 }: ReceiptsTimelineProps) {
   return (
     <section
@@ -56,7 +61,11 @@ export function ReceiptsTimeline({
 
       {receipts.length === 0 ? (
         <div className="mt-4 rounded-[10px] border border-dashed border-[var(--line)] bg-white p-4 text-sm text-[var(--soft-ink)]">
-          No receipts yet.
+          {isLive
+            ? address
+              ? `No receipts for ${formatShortAddress(address)} yet. Make a deposit or use the wallet that already created activity.`
+              : "No receipts yet. Connect the wallet that made deposits or withdrawals to view its activity."
+            : "No receipts yet."}
         </div>
       ) : (
         <div className={`mt-4 ${compact ? "scroll-area min-h-0 flex-1 overflow-y-auto pr-1.5 space-y-2.5" : "space-y-3"}`}>

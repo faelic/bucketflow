@@ -20,6 +20,10 @@ import {
 } from "@/lib/contracts";
 import { useDashboardState } from "@/components/dashboard/DashboardStateProvider";
 import { formatDateLabel, formatUsd } from "@/lib/format";
+import {
+  persistLocalReceipts,
+  receiptItemsFromTransactionReceipt,
+} from "@/lib/receipt-log-utils";
 import type { BucketKey } from "@/lib/types";
 
 const bucketOptions = [
@@ -77,7 +81,7 @@ function getWithdrawErrorMessage(error: Error | null) {
 }
 
 export function WithdrawPanel() {
-  const { accountData, supportsWrites } = useDashboardState();
+  const { accountData, address, supportsWrites } = useDashboardState();
   const queryClient = useQueryClient();
   const [selectedBucket, setSelectedBucket] = useState<BucketKey>("cashOut");
   const [amount, setAmount] = useState("");
@@ -95,17 +99,28 @@ export function WithdrawPanel() {
     error,
     reset,
   } = useWriteContract();
-  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
+  const {
+    data: withdrawReceipt,
+    isLoading: isConfirming,
+    isSuccess,
+  } = useWaitForTransactionReceipt({
     hash: withdrawHash,
   });
 
+  const tokenDecimals = Number(tokenDecimalsData ?? USDC_DECIMALS);
+
   useEffect(() => {
     if (!isSuccess) return;
+    persistLocalReceipts(
+      address,
+      receiptItemsFromTransactionReceipt({
+        receipt: withdrawReceipt,
+        tokenDecimals,
+      }),
+    );
     queryClient.invalidateQueries();
     queryClient.refetchQueries({ queryKey: ["bucketflow-live-receipts"], type: "active" });
-  }, [isSuccess, queryClient]);
-
-  const tokenDecimals = Number(tokenDecimalsData ?? USDC_DECIMALS);
+  }, [address, isSuccess, queryClient, tokenDecimals, withdrawReceipt]);
 
   const parsedAmount = (() => {
     if (!amount.trim()) return zero;
